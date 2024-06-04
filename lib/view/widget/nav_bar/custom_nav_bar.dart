@@ -5,6 +5,7 @@ import 'package:eventa_project/color.dart';
 import 'package:eventa_project/controller/provider_navbar.dart';
 import 'package:eventa_project/view/screen/home%20page/Home_page.dart';
 import 'package:eventa_project/view/screen/publicevent/Veiw%20public_events.dart';
+import 'package:eventa_project/view/screen/publicevent/create_public.dart';
 import 'package:eventa_project/view/screen/ticket/tickets_page.dart';
 import 'package:eventa_project/view/screen/wallet/wallet_user_page.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class custom_nav_bar extends ConsumerWidget {
                 ref.read(selectedIconProvider.notifier).state = 0;
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const TicketsPage()),
+                  MaterialPageRoute(builder: (context) =>  TicketsPage()),
                 );
               },
             ),
@@ -100,7 +101,9 @@ class custom_nav extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>CreatePublicEvent()));
+            },
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,

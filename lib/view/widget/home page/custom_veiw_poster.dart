@@ -3,7 +3,6 @@
 import 'package:eventa_project/color.dart';
 import 'package:eventa_project/controller/postar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final adsProvider = Provider<List<String>>((ref) => [
@@ -14,6 +13,8 @@ final adsProvider = Provider<List<String>>((ref) => [
     ]);
 
 class DotsIndicator extends ConsumerWidget {
+  const DotsIndicator({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(currentIndexProvider);
@@ -24,8 +25,8 @@ class DotsIndicator extends ConsumerWidget {
         ref.watch(adsProvider).length,
         (int index) {
           return AnimatedContainer(
-            duration: Duration(milliseconds: 200),
-            margin: EdgeInsets.symmetric(horizontal: 4.0),
+            duration: const Duration(milliseconds: 200),
+            margin: const EdgeInsets.symmetric(horizontal: 4.0),
             height: 8.0,
             width: 8.0,
             decoration: BoxDecoration(
@@ -39,6 +40,8 @@ class DotsIndicator extends ConsumerWidget {
   }
 }
 class Customveiwposter1 extends ConsumerStatefulWidget {
+  const Customveiwposter1({super.key});
+
   @override
   Customveiwposter createState() => Customveiwposter();
 }
@@ -66,7 +69,7 @@ class Customveiwposter extends ConsumerState<Customveiwposter1> {
     ref.listen<int>(currentIndexProvider, (previous, next) {
       _pageController.animateToPage(
         next,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     });
@@ -84,7 +87,7 @@ class Customveiwposter extends ConsumerState<Customveiwposter1> {
               return Container(
                 height: 150,
                 width: 250,
-                margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                margin: const EdgeInsets.symmetric(horizontal: 25.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   image: DecorationImage(
@@ -96,8 +99,8 @@ class Customveiwposter extends ConsumerState<Customveiwposter1> {
             },
           ),
         ),
-        SizedBox(height: 10),
-        DotsIndicator(),
+        const SizedBox(height: 10),
+        const DotsIndicator(),
       ],
     );
   }

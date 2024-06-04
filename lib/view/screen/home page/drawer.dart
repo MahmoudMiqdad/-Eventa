@@ -1,17 +1,21 @@
 
 import 'package:eventa_project/color.dart';
+import 'package:eventa_project/view/screen/home%20page/Home_page.dart';
+import 'package:eventa_project/view/screen/rating%20page/rating_page.dart';
 import 'package:flutter/material.dart';
 
 
 
 class CustomDrawer extends StatelessWidget {
   final List<Map<String, dynamic>> menuItems = [
-    // {'icon': Icons.home, 'title': 'Home', 'page': HomePage()},
-    // {'icon': Icons.person, 'title': 'Profile', 'page': ProfilePage()},
-    // {'icon': Icons.settings, 'title': 'Settings', 'page': SettingsPage()},
+    {'icon': Icons.home, 'title': 'Home', 'page': HomePage()},
+    {'icon': Icons.rate_review, 'title': 'Rating', 'page': RatingPage()},
+    // {'icon': Icons.settings, 'title': 'Settings', 'page': },
     // {'icon': Icons.info, 'title': 'About', 'page': AboutPage()},
     // {'icon': Icons.logout, 'title': 'Logout', 'page': LogoutPage()},
   ];
+
+   CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +23,10 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountName: Text("John Doe"),
-            accountEmail: Text("john.doe@example.com"),
+          const UserAccountsDrawerHeader(
+            
+            accountName: Text("MAHMOUD"),
+            accountEmail: Text("MAHMOUD@gmile.com"),
             currentAccountPicture: CircleAvatar(
               backgroundImage: AssetImage('assets/images/logo.png',),
             ),
@@ -31,13 +36,13 @@ class CustomDrawer extends StatelessWidget {
           ),
           ...menuItems.map((item) {
             return ListTile(
-              leading: Icon(item['icon']),
+              leading: Icon(item['icon'],color: Appcolor.mainColor,),
               title: Text(item['title']),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => item['page']));
-                Navigator.pop(context);
+                
               },
             );
           }).toList(),

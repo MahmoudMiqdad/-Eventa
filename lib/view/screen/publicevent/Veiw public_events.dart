@@ -18,8 +18,10 @@ class VeiwpublicEvents extends ConsumerWidget {
      final showPopup = ref.watch(popupProvider);
     return Scaffold(
       appBar: AppBar(
+          elevation: 40,
         backgroundColor: Appcolor.appBar,
-      
+              iconTheme:const IconThemeData(color: Appcolor.white),
+
         title: Text(
           "Events",
           style: TextStyle(fontSize: 31, color: Appcolor.white),

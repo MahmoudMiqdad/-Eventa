@@ -1,5 +1,6 @@
 
 
+import 'package:eventa_project/color.dart';
 import 'package:eventa_project/view/widget/home%20page/custom_textfromfild.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +20,7 @@ class CustomAppbar extends StatelessWidget {
         height: 250,
         width: double.infinity,
         decoration: const BoxDecoration(
-      
-          color: Color(0xff4A43EC),
+          color:Appcolor.appBar,
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(40),
             bottomRight: Radius.circular(40),
