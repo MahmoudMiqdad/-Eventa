@@ -1,3 +1,4 @@
+import 'package:eventa_project/color.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightThem = ThemeData(
@@ -10,18 +11,19 @@ ThemeData lightThem = ThemeData(
         unselectedItemColor: Colors.grey),
     useMaterial3: true,
     appBarTheme: const AppBarTheme(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white),
+      elevation: 40,
+        iconTheme: IconThemeData(color: Appcolor.white),
+        backgroundColor: Appcolor.appBar),
     textTheme: const TextTheme(
         titleLarge: TextStyle(
       fontSize: 28,
     )),
     inputDecorationTheme:  InputDecorationTheme(
-        border: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black),borderRadius:BorderRadius.circular(10)),
+        border: OutlineInputBorder(borderSide: const BorderSide(color: Appcolor.mainColor),borderRadius:BorderRadius.circular(10)),
         enabledBorder:
-            OutlineInputBorder(borderSide: const BorderSide(color: Colors.black),borderRadius:BorderRadius.circular(10)),
+            OutlineInputBorder(borderSide: const BorderSide(color:  Appcolor.mainColor),borderRadius:BorderRadius.circular(10)),
         focusedBorder:
-            OutlineInputBorder(borderSide: const BorderSide(color: Colors.black),borderRadius:BorderRadius.circular(10))),
+            OutlineInputBorder(borderSide: const BorderSide(color:  Appcolor.mainColor),borderRadius:BorderRadius.circular(10))),
     colorScheme:
         const ColorScheme.light(surface: Colors.white, primary: Colors.black));
 
@@ -33,11 +35,11 @@ ThemeData darkTheme = ThemeData(
     colorScheme:
         const ColorScheme.dark(surface: Colors.black, primary: Colors.white),
     inputDecorationTheme:  InputDecorationTheme(
-        border: OutlineInputBorder(borderSide: const BorderSide(color: Colors.white),borderRadius:BorderRadius.circular(10)),
+        border: OutlineInputBorder(borderSide: const BorderSide(color: Colors.white),borderRadius:BorderRadius.circular(20)),
         enabledBorder:
-            OutlineInputBorder(borderSide: const BorderSide(color: Colors.white),borderRadius:BorderRadius.circular(10)),
+            OutlineInputBorder(borderSide: const BorderSide(color: Colors.white),borderRadius:BorderRadius.circular(20)),
         focusedBorder:
-            OutlineInputBorder(borderSide: const BorderSide(color: Colors.white),borderRadius:BorderRadius.circular(10))),
+            OutlineInputBorder(borderSide: const BorderSide(color: Colors.white),borderRadius:BorderRadius.circular(20))),
     textTheme: const TextTheme(titleLarge: TextStyle(fontSize: 28)),
     useMaterial3: true,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(

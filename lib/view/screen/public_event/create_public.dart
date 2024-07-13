@@ -15,9 +15,7 @@ class CreatePublicEvent extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-          elevation: 40,
-        iconTheme: const IconThemeData(color: Appcolor.white),
-        backgroundColor: Appcolor.appBar,
+        
         title: const Text(
           'Create Public Event',
           style: TextStyle(color: Colors.white),

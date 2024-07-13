@@ -1,6 +1,6 @@
 class AppImageAsset {
   static const String rooteImages = "assets/images";
-  static const String rootLottie = "assets/lottie";
+
   static const String logo = "$rooteImages/logo.png";
   static const String splachLogo = "$rooteImages/eventa1.png";
   static const String event =

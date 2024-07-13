@@ -1,9 +1,6 @@
 
-
 import 'package:eventa_project/color.dart';
-import 'package:eventa_project/view/widget/home%20page/custom_textfromfild.dart';
 import 'package:flutter/material.dart';
-
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({
     super.key,
@@ -75,11 +72,21 @@ class CustomAppbar extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 30,
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 24),
-                child:Customtextformfieldhome()
+                child:Row(
+                  children: [
+                   
+                     Icon(
+                              Icons.search,
+                              size: 40,
+                              color: Colors.white,
+                            ),
+                             Text('| Search..',style: TextStyle(color:Appcolor.grey,fontSize: 35),),
+                  ],
+                )
               )
             ],
           ),

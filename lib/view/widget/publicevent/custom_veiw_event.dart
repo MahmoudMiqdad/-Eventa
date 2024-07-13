@@ -1,5 +1,7 @@
 import 'package:eventa_project/color.dart';
+import 'package:eventa_project/view/screen/public_event/event_attendance.dart';
 import 'package:flutter/material.dart';
+
 
 class Customveiwevent extends StatelessWidget {
   Customveiwevent({super.key});
@@ -29,58 +31,64 @@ class Customveiwevent extends StatelessWidget {
       itemCount: events.length,
       itemBuilder: (context, index) {
         final event = events[index];
-        return Card(
-          elevation: 5,
-          shadowColor: Appcolor.mainColor,
-          margin: EdgeInsets.all(10),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 92,
-                  width: 72,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                      image: AssetImage(event['image']!),
-                      fit: BoxFit.cover,
+        return GestureDetector(
+          onTap:(){
+         Navigator.push(context, MaterialPageRoute(builder:(context)=>AttendanceListScreen() ));
+          } ,
+          child: Card(
+            
+            elevation: 5,
+            shadowColor: Appcolor.mainColor,
+            margin: EdgeInsets.all(10),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 92,
+                    width: 72,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: AssetImage(event['image']!),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      event['date']!,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Appcolor.mainColor,
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        event['date']!,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Appcolor.mainColor,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 15,),
-                    Text(
-                      event['name']!,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                      SizedBox(height: 15,),
+                      Text(
+                        event['name']!,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      event['location']!,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[600],
+                      SizedBox(height: 10),
+                      Text(
+                        event['location']!,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey[600],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

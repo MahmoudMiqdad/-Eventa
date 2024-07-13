@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final adsProvider = Provider<List<String>>((ref) => [
-      'assets/images/eventa1.jpg',
-  'assets/images/sunny.png',
+      'assets/images/test1.webp',
+  'assets/images/test2.webp',
   'assets/images/eventa1.jpg',
-  'assets/images/sunny.png',
+  'assets/images/test1.webp',
     ]);
 
 class DotsIndicator extends ConsumerWidget {

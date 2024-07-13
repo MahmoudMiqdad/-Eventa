@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class Customcategories extends StatelessWidget {
    Customcategories({super.key});
 final List<Map<String, dynamic>> items = [
-  {'color': Colors.red, 'icon': Icons.favorite, 'text': 'Item 1'},
-  {'color': Colors.green, 'icon': Icons.star, 'text': 'Item 2'},
-  {'color': Colors.blue, 'icon': Icons.thumb_up, 'text': 'Item 3'},
-  {'color': Colors.orange, 'icon': Icons.lightbulb, 'text': 'Item 4'},
-  {'color': Colors.purple, 'icon': Icons.home, 'text': 'Item 5'},
+  {'color': Colors.red, 'icon': Icons.favorite, 'text': 'Music'},
+  {'color': Colors.green, 'icon': Icons.sports_basketball, 'text': 'Sports '},
+  {'color': Colors.blue, 'icon': Icons.people_alt_sharp, 'text': 'Poetry '},
+  {'color': Colors.orange, 'icon': Icons.lightbulb, 'text': 'Sports '},
+  {'color': Colors.purple, 'icon': Icons.home, 'text': 'Music '},
 ];
   @override
   Widget build(BuildContext context) {

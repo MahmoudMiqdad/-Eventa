@@ -2,6 +2,7 @@
 import 'package:eventa_project/color.dart';
 import 'package:eventa_project/view/screen/home%20page/Home_page.dart';
 import 'package:eventa_project/view/screen/rating%20page/rating_page.dart';
+import 'package:eventa_project/view/screen/wallet/wallet_user_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -10,7 +11,7 @@ class CustomDrawer extends StatelessWidget {
   final List<Map<String, dynamic>> menuItems = [
     {'icon': Icons.home, 'title': 'Home', 'page': HomePage()},
     {'icon': Icons.rate_review, 'title': 'Rating', 'page': RatingPage()},
-    // {'icon': Icons.settings, 'title': 'Settings', 'page': },
+    {'icon': Icons.account_balance_wallet, 'title': 'Settings', 'page':WalletUserPage() },
     // {'icon': Icons.info, 'title': 'About', 'page': AboutPage()},
     // {'icon': Icons.logout, 'title': 'Logout', 'page': LogoutPage()},
   ];
