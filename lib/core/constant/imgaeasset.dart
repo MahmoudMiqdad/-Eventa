@@ -11,13 +11,11 @@ class AppImageAsset {
   static const String nophoto =
       "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
 
-  //lottie
-  static const String loading = "$rooteImages/loading.json";
-  static const String offline = "$rooteImages/no_internet.webp";
-  static const String nodata = "$rooteImages/no-data.png";
-  static const String server = "$rooteImages/sever_falid.png";
-  //onboarding
-  // static const String onboarding1 = "$rooteImages/onboarding1.png";
-  // static const String onboarding2 = "$rooteImages/onboarding2.png";
-  // static const String onboarding3 = "$rooteImages/onboarding3.png";
+//owner categories
+  static const String  bands = "$rooteImages/bands.jpg";
+  static const String Restaurants = "$rooteImages/Restaurants.png";
+  static const String cars = "$rooteImages/cars.png";
+  static const String sound = "$rooteImages/sound.png";
+  static const String flower = "$rooteImages/flower.png";
+ static const String security = "$rooteImages/security.jpg";
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:eventa_project/view/widget/home%20page/custom_veiw_poster.dart';
+import 'package:eventa_project/view/widgets/home%20page/custom_veiw_poster.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CurrentIndexNotifier extends StateNotifier<int> {

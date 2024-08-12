@@ -1,12 +1,12 @@
 import 'package:eventa_project/color.dart';
 import 'package:eventa_project/controller/provider_navbar.dart';
 import 'package:eventa_project/view/screen/home%20page/drawer.dart';
-import 'package:eventa_project/view/widget/home%20page/custom_appbar.dart';
-import 'package:eventa_project/view/widget/home%20page/custom_categories.dart';
+import 'package:eventa_project/view/widgets/home%20page/custom_appbar.dart';
+import 'package:eventa_project/view/widgets/home%20page/custom_categories.dart';
 
-import 'package:eventa_project/view/widget/home%20page/custom_veiw_poster.dart';
-import 'package:eventa_project/view/widget/nav_bar/custom_nav_bar.dart';
-import 'package:eventa_project/view/widget/nav_bar/custom_nav_bar_buttom.dart';
+import 'package:eventa_project/view/widgets/home%20page/custom_veiw_poster.dart';
+import 'package:eventa_project/view/widgets/nav_bar/custom_nav_bar.dart';
+import 'package:eventa_project/view/widgets/nav_bar/custom_nav_bar_buttom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

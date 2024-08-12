@@ -1,9 +1,9 @@
 import 'package:eventa_project/color.dart';
 import 'package:eventa_project/data/model/create_event_model.dart';
-import 'package:eventa_project/view/widget/publicevent/custom_create_image.dart';
-import 'package:eventa_project/view/widget/publicevent/custom_menu.dart';
-import 'package:eventa_project/view/widget/publicevent/custom_textfield.dart';
-import 'package:eventa_project/view/widget/publicevent/custom_textfield_date.dart';
+import 'package:eventa_project/view/widgets/publicevent/custom_create_image.dart';
+import 'package:eventa_project/view/widgets/publicevent/custom_menu.dart';
+import 'package:eventa_project/view/widgets/publicevent/custom_textfield.dart';
+import 'package:eventa_project/view/widgets/publicevent/custom_textfield_date.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -90,7 +90,7 @@ class CreatePublicEvent extends ConsumerWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Handle form submission
+                 
                   final description = event.description;
                   final dateTime = event.dateTime;
                   final seats = event.seats;
