@@ -1,0 +1,2 @@
+# -Eventa
+Event management app
