@@ -1,24 +1,23 @@
-
-import 'package:eventa_project/data/model/create_event_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-
-class custom_TextField_Date extends StatelessWidget {
-  const custom_TextField_Date({
-    super.key,
-    required this.event,
-    required this.eventNotifier,
-  });
-
-  final Event event;
-  final EventNotifier eventNotifier;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: TextEditingController(text: event.dateTime),
+Widget customTextFieldDate({
+  required String errorText,
+  required GlobalKey<FormState> formKey,
+  required TextEditingController controller,
+}) {
+  return Form(
+    key: formKey,
+    child: TextFormField(
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return errorText;
+        }
+        return null;
+      },
+      controller: controller,
       decoration: const InputDecoration(
-        labelText: 'Date & Time',
+        labelText: 'Date and Time',
         border: OutlineInputBorder(),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
@@ -27,24 +26,39 @@ class custom_TextField_Date extends StatelessWidget {
         ),
       ),
       onTap: () async {
-        FocusScope.of(context).requestFocus(new FocusNode());
-        DateTime? date = await showDatePicker(
-          context: context,
+        FocusScope.of(formKey.currentContext!).requestFocus(FocusNode());
+
+        DateTime? selectedDate = await showDatePicker(
+          context: formKey.currentContext!,
           initialDate: DateTime.now(),
           firstDate: DateTime(2000),
           lastDate: DateTime(2101),
         );
-        if (date != null) {
-          TimeOfDay? time = await showTimePicker(
-            context: context,
+
+        if (selectedDate != null) {
+          TimeOfDay? selectedTime = await showTimePicker(
+            context: formKey.currentContext!,
             initialTime: TimeOfDay.now(),
           );
-          if (time != null) {
-            eventNotifier.setDateTime(
-                "${date.year}-${date.month}-${date.day} T ${time.hour}:${time.minute}");
+
+          if (selectedTime != null) {
+            // Combine date and time
+            DateTime dateTime = DateTime(
+              selectedDate.year,
+              selectedDate.month,
+              selectedDate.day,
+              selectedTime.hour,
+              selectedTime.minute,
+            );
+
+            // Format to 'yyyy-MM-dd HH:mm' format
+            String formattedDateTime = DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
+
+            // Set the formatted date and time to the controller
+            controller.text = formattedDateTime;
           }
         }
       },
-    );
-  }
+    ),
+  );
 }

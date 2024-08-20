@@ -1,6 +1,6 @@
 
 import 'package:eventa_project/color.dart';
-import 'package:eventa_project/view/widgets/search/search.dart';
+import 'package:eventa_project/view/screen/public_event/searchpublic.dart';
 import 'package:flutter/material.dart';
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({
@@ -45,6 +45,7 @@ class CustomAppbar extends StatelessWidget {
                   const Expanded(
                     child: Center(
                       child: Text(
+                        
                         "EventA",
                         style: TextStyle(
                           color: Colors.white,

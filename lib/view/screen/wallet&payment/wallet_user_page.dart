@@ -1,17 +1,25 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:eventa_project/color.dart';
-import 'package:eventa_project/controller/wallet.dart';
+import 'package:eventa_project/view/screen/wallet&payment/cubit/cubit.dart';
+import 'package:eventa_project/view/screen/wallet&payment/cubit/states.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WalletUserPage extends ConsumerWidget {
+class WalletUserPage extends StatelessWidget {
   const WalletUserPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final balance = ref.watch(balanceProvider);
+  Widget build(BuildContext context) {
     
-    return Scaffold(
-      appBar: AppBar(
+    return BlocProvider(
+        create: (context) => moneyCubit()..getUserwallet(),
+        child: BlocConsumer<moneyCubit, moneyStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            var money = moneyCubit.get(context);
+
+            return Scaffold(
+                appBar: AppBar(
                 iconTheme:const IconThemeData(color: Appcolor.white),
 
         elevation: 40,
@@ -21,7 +29,11 @@ class WalletUserPage extends ConsumerWidget {
         ),
         backgroundColor: Appcolor.mainColor,
       ),
-      body: Padding(
+                body: ConditionalBuilder(
+                    condition: state is! MoneyInitialState,
+                    builder: (context) => ListView.separated(
+                          itemBuilder: (BuildContext context, int index) {
+                            return  Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
           heightFactor: 3,
@@ -61,7 +73,7 @@ class WalletUserPage extends ConsumerWidget {
                   const SizedBox(height: 20),
                   const SizedBox(height: 10),
                   Text(
-                    '\$${balance.toStringAsFixed(2)}',
+                    '\$${money.money.first.money}',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 32,
@@ -73,7 +85,18 @@ class WalletUserPage extends ConsumerWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(
+                            height: 20,
+                          ),
+                          itemCount: money.money.length,
+                        ),
+                    fallback: (context) => const Center(
+                          child: CircularProgressIndicator(),
+                        )));
+          },
+        ));
   }
 }

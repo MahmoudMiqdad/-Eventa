@@ -1,5 +1,5 @@
 
-import 'package:eventa_project/data/model/ticket.dart';
+import 'package:eventa_project/model/ticket.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TicketsNotifier extends StateNotifier<List<Ticket>> {

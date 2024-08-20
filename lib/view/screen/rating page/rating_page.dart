@@ -1,6 +1,7 @@
 
 import 'package:eventa_project/color.dart';
-import 'package:eventa_project/data/model/rating_model.dart';
+import 'package:eventa_project/model/rating_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

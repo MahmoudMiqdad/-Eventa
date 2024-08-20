@@ -1,31 +1,47 @@
-
-import 'package:eventa_project/data/model/create_event_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-
-class custom_menu extends StatelessWidget {
-  const custom_menu({
+class CustomMenu extends StatelessWidget {
+  const CustomMenu({
     super.key,
-    required this.event,
-    required this.eventNotifier,
+    required this.controller, required this.validator, required this.errorText,
   });
 
-  final Event event;
-  final EventNotifier eventNotifier;
-
+  final TextEditingController controller;
+ final GlobalKey<FormState> validator;
+final String errorText;
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
-      value: event.category,
+       validator: (value) {
+          if (value == null || value.isEmpty) {
+            return errorText;
+          }
+          return null;
+        },
+         key: validator,
+      value: null, 
       items: ['Music', 'Art', 'Tech', 'Sports', 'Food']
-          .map((category) {
+          .asMap()
+          .entries
+          .map((entry) {
+        int index = entry.key;
+        String category = entry.value;
         return DropdownMenuItem<String>(
           value: category,
           child: Text(category),
+          onTap: () {
+          
+            controller.text = index.toString();
+          },
         );
       }).toList(),
-      onChanged: (value) => eventNotifier.setCategory(value),
+      onChanged: (value) {
+   
+      },
       decoration: const InputDecoration(
+        icon: Icon(Icons.category),
+        hintText: 'Category',
         labelText: 'Category',
         border: OutlineInputBorder(),
         focusedBorder: OutlineInputBorder(

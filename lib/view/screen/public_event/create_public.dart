@@ -1,125 +1,174 @@
+import 'dart:io';
+
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:eventa_project/color.dart';
-import 'package:eventa_project/data/model/create_event_model.dart';
-import 'package:eventa_project/view/widgets/publicevent/custom_create_image.dart';
-import 'package:eventa_project/view/widgets/publicevent/custom_menu.dart';
-import 'package:eventa_project/view/widgets/publicevent/custom_textfield.dart';
+import 'package:eventa_project/view/screen/public_event/cubit/cubit.dart';
+import 'package:eventa_project/view/screen/public_event/cubit/states.dart';
 import 'package:eventa_project/view/widgets/publicevent/custom_textfield_date.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
-class CreatePublicEvent extends ConsumerWidget {
+class CreatePublicEvent extends StatefulWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final event = ref.watch(eventProvider);
-    final eventNotifier = ref.read(eventProvider.notifier);
+  _CreatePublicEventState createState() => _CreatePublicEventState();
+}
 
-    return Scaffold(
-      appBar: AppBar(
-        
-        title: const Text(
-          'Create Public Event',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              CustomCreateEvent(
-                context: context,
-                event: event,
-                eventNotifier: eventNotifier,
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                onChanged: (value) => eventNotifier.setnName(value),
-                decoration: const InputDecoration(
-                  labelText: 'Name Event',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.horizontal(
-                          right: Radius.circular(400),
-                          left: Radius.circular(50))),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xFF5669ff),
-                    ),
-                  ),
-                ),
-              ),
+class _CreatePublicEventState extends State<CreatePublicEvent> {
+  final _formKey = GlobalKey<FormState>();
 
-              const SizedBox(height: 20),
-              TextField(
-                onChanged: (value) => eventNotifier.setDescription(value),
-                decoration: const InputDecoration(
-                  labelText: 'Event Description',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xFF5669ff),
+  final ImagePicker _picker = ImagePicker();
+  XFile? image;
+
+  List<Map<String, String>> categories = [
+    {'id': '1', 'name': 'حفلة رياضية'},
+    {'id': '2', 'name': 'حفلة شعرية'},
+    {'id': '3', 'name': 'قومية صحية'},
+  ];
+
+  String? selectedCategory;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => publiceventCubit(),
+      child: BlocConsumer<publiceventCubit, publicStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var createpublicevent = publiceventCubit.get(context);
+
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Create Event',style: TextStyle(color: Appcolor.white),),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  children: [
+                    // Image picker with camera icon
+                    GestureDetector(
+                      onTap: () async {
+                        final pickedFile = await _picker.pickImage(
+                            source: ImageSource.gallery);
+                        if (pickedFile != null) {
+                          setState(() {
+                            image = pickedFile;
+                          });
+                        }
+                      },
+                      child: Container(
+                        height: 150,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          border: Border.all(color:Appcolor.mainColor),
+                          borderRadius: BorderRadius.circular(8),
+                          image: image != null
+                              ? DecorationImage(
+                                  image: FileImage(File(image!.path)),
+                                  fit: BoxFit.cover,
+                                )
+                              : null,
+                        ),
+                        child: image == null
+                            ? Center(
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  size: 50,
+                                  color:Appcolor.mainColor,
+                                ),
+                              )
+                            : null,
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              //===================================================
-              custom_TextField_Date(event: event, eventNotifier: eventNotifier),
-              const SizedBox(height: 20),
-              Custom_TextField(
-                eventNotifier: eventNotifier,
-                textInputType: TextInputType.number,
-                labelText: 'Number of Seats',
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                onChanged: (value) =>
-                    eventNotifier.setPrice(double.parse(value)),
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Ticket Price',
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xFF5669ff),
+                    const SizedBox(height: 25),
+                    TextFormField(
+                      controller: createpublicevent.pupliceventControllers.nameController,
+                      decoration: const InputDecoration(labelText: 'Name'),
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter a name' : null,
                     ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              custom_menu(event: event, eventNotifier: eventNotifier),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
+                    const SizedBox(height: 25),
+                    TextFormField(
+                      controller: createpublicevent.pupliceventControllers.ticketpriceController,
+                      decoration: const InputDecoration(labelText: 'Ticket Price'),
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter a ticket price' : null,
+                    ),
+                    const SizedBox(height: 25),
+                    DropdownButtonFormField<String>(
+                      decoration: const InputDecoration(labelText: 'Category'),
+                      value: selectedCategory,
+                      items: categories.map((category) {
+                        return DropdownMenuItem<String>(
+                          value: category['id'],
+                          child: Text(category['name']!),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedCategory = value;
+                        });
+                      },
+                      validator: (value) =>
+                          value == null ? 'Please select a category' : null,
+                    ),
+                    const SizedBox(height: 25),
+                    TextFormField(
+                      controller: createpublicevent.pupliceventControllers.addressController,
+                      decoration: const InputDecoration(labelText: 'Address'),
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter an address' : null,
+                    ),
+                    const SizedBox(height: 25),
+                    TextFormField(
+                      controller: createpublicevent.pupliceventControllers.availableseatsController,
+                      decoration: const InputDecoration(labelText: 'Available Seats'),
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter the number of available seats' : null,
+                    ),
+                    const SizedBox(height: 25),
+                    customTextFieldDate(controller: createpublicevent.pupliceventControllers.datecontroler,errorText: 'Please enter a date',formKey: createpublicevent.publiceventValidators.dateValidator),
                  
-                  final description = event.description;
-                  final dateTime = event.dateTime;
-                  final seats = event.seats;
-                  final price = event.price;
-                  final category = event.category;
-
-                 
-                  print('Description: $description');
-                  print('Date & Time: $dateTime');
-                  print('Seats: $seats');
-                  print('Price: $price');
-                  print('Category: $category');
-                },
-                
-                style: ButtonStyle(
-                  fixedSize: WidgetStateProperty.all(const Size(200, 60)),
-                  overlayColor:
-                      WidgetStateProperty.all(const Color.fromARGB(255, 5, 24, 168)),
-                  backgroundColor:
-                      WidgetStateProperty.all(const Color(0xFF5669ff)),
-                ),
-                child: const Text(
-                  'Create Event',
-                  style: TextStyle(color: Appcolor.white),
+                    const SizedBox(height: 25),
+                    TextFormField(
+                      controller: createpublicevent.pupliceventControllers.descriptionController,
+                      decoration: const InputDecoration(labelText: 'Description'),
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter a description' : null,
+                    ),
+                    const SizedBox(height: 25),
+                    GestureDetector(
+                      onTap:  () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            createpublicevent.createpublicevent(
+                              name: createpublicevent.pupliceventControllers.nameController.text,
+                              ticketPrice: createpublicevent.pupliceventControllers.ticketpriceController.text,
+                              categoryId: selectedCategory.toString(),
+                              address: createpublicevent.pupliceventControllers.addressController.text,
+                              availableSeats: createpublicevent.pupliceventControllers.availableseatsController.text,
+                              date: createpublicevent.pupliceventControllers.datecontroler.text,
+                              description: createpublicevent.pupliceventControllers.descriptionController.text,
+                              image: image ?? XFile(''),
+                              context: context,
+                            );
+                          }
+                        },
+                      child: Container(
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),
+                        color: Appcolor.mainColor),
+                        height: 60,
+                        width: double.infinity,
+                        child: Center(child: const Text('CreatePublicEvent',style: TextStyle(color: Appcolor.white),)),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

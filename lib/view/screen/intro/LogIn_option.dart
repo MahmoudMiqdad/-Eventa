@@ -11,12 +11,12 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Login As  ',
           style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
-            color: const Color.fromARGB(255, 236, 236, 236),
+            color: Color.fromARGB(255, 236, 236, 236),
           ),
         ),
       ),
@@ -30,16 +30,16 @@ class LoginPage extends StatelessWidget {
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 70),
-            SizedBox(
+            const SizedBox(height: 70),
+            const SizedBox(
               height: 100,
               width: 250,
               child: Image(
-                image: AssetImage('assets/images/eventa.jpg'),
+                image: const AssetImage('assets/images/eventa.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
-            Text(
+            const Text(
               'Eventa',
               style: TextStyle(
                 fontSize: 50,
@@ -50,11 +50,11 @@ class LoginPage extends StatelessWidget {
             ),
             Container(
               width: 230, // حدد العرض الذي تريده هنا
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             buildElevatedButton(
                 'User                      ', Icons.supervised_user_circle, () {
               Navigator.push(
@@ -62,21 +62,21 @@ class LoginPage extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => User_LogIn()),
               );
             }),
-            SizedBox(height: 20),
-            buildElevatedButton('Hall Owner           ', Icons.house, () {
+            const SizedBox(height: 20),
+            buildElevatedButton('Hall                       ', Icons.house, () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Hall_LogIn()),
+                MaterialPageRoute(builder: (context) => HallLogIn()),
               );
             }),
-            SizedBox(height: 20),
-            buildElevatedButton('Service Provider ', Icons.design_services, () {
+            const SizedBox(height: 20),
+            buildElevatedButton('Owner                    ', Icons.design_services, () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Owner_LogIn()),
+                MaterialPageRoute(builder: (context) => OwnerLogin()),
               );
             }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             buildElevatedButton(
                 'Exit                       ', Icons.exit_to_app, () {
                 

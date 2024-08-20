@@ -1,7 +1,7 @@
 import 'package:eventa_project/color.dart';
 import 'package:eventa_project/controller/provider_navbar.dart';
-import 'package:eventa_project/core/constant/imgaeasset.dart';
-import 'package:eventa_project/data/model/owner_category.dart';
+import 'package:eventa_project/model/owner_category.dart';
+import 'package:eventa_project/shared/imgaeasset.dart';
 import 'package:eventa_project/view/screen/owner/owner_list.dart';
 import 'package:eventa_project/view/widgets/nav_bar/custom_nav_bar.dart';
 import 'package:eventa_project/view/widgets/nav_bar/custom_nav_bar_buttom.dart';
@@ -11,12 +11,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class OwnerCategories extends ConsumerWidget {
   OwnerCategories({super.key});
   final List<ServiceCategory> categories = [
-    ServiceCategory('Restaurants', '${AppImageAsset.Restaurants}'),
-    ServiceCategory('Cars', '${AppImageAsset.cars}'),
-    ServiceCategory('  bands', '${AppImageAsset.bands}'),
-    ServiceCategory(' Flower shops', '${AppImageAsset.flower}'),
-    ServiceCategory(' Security', '${AppImageAsset.security}'),
-    ServiceCategory(' Sound', '${AppImageAsset.sound}'),
+    ServiceCategory('Restaurants', '${AppImageAsset.Restaurants}',1),
+    ServiceCategory('Cars', '${AppImageAsset.cars}',2),
+    ServiceCategory('  bands', '${AppImageAsset.bands}',3),
+    ServiceCategory(' Flower shops', '${AppImageAsset.flower}',4),
+    ServiceCategory(' Security', '${AppImageAsset.security}',5),
+    ServiceCategory(' Sound', '${AppImageAsset.sound}',6),
   ];
 
   @override
@@ -51,6 +51,7 @@ class OwnerCategories extends ConsumerWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => OwnerList(
+                                  categoryId:  categories[index].id,
                                       ownertype: categories[index].name,
                                     )));
                       },

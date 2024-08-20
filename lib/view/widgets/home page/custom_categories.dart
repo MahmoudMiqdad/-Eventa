@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 class Customcategories extends StatelessWidget {
    Customcategories({super.key});
 final List<Map<String, dynamic>> items = [
-  {'color': Colors.red, 'icon': Icons.favorite, 'text': 'Music'},
-  {'color': Colors.green, 'icon': Icons.sports_basketball, 'text': 'Sports '},
-  {'color': Colors.blue, 'icon': Icons.people_alt_sharp, 'text': 'Poetry '},
-  {'color': Colors.orange, 'icon': Icons.lightbulb, 'text': 'Sports '},
-  {'color': Colors.purple, 'icon': Icons.home, 'text': 'Music '},
+  {'color': Colors.red, 'icon': Icons.favorite, 'text': 'Music','id':1},
+  {'color': Colors.green, 'icon': Icons.sports_basketball, 'text': 'Sports ','id':2},
+  {'color': Colors.blue, 'icon': Icons.people_alt_sharp, 'text': 'Poetry ','id':3},
+  {'color': Colors.orange, 'icon': Icons.lightbulb, 'text': 'Sports ','id':4},
+  {'color': Colors.purple, 'icon': Icons.home, 'text': 'Music ','id':5},
 ];
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ final List<Map<String, dynamic>> items = [
                     onTap: (){
                        Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>VeiwpublicEvents ()),
+                  MaterialPageRoute(builder: (context) =>VeiwpublicEvents (categorieid: items[index]['id'],)),
                  
                 );
                     },

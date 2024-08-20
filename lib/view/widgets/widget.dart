@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
 // import 'package:image_picker/image_picker.dart';
 // import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
-Widget buildTextField(
-    IconData icon, String hintText, String labelText, bool obscureText) {
-  return TextField(
-    decoration: InputDecoration(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30.0),
+Widget buildTextField({required final String errorText,
+  required GlobalKey<FormState> validator, 
+  required TextEditingController controller,
+   required IconData icon, required String hintText, required String labelText, } 
+  ) {
+  return Form(
+    child: TextFormField(
+         validator: (value) {
+          if (value == null || value.isEmpty) {
+            return errorText;
+          }
+          return null;
+        },
+         
+      key: validator,
+      controller: controller,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        prefixIcon: Icon(icon),
+        hintText: hintText,
+        labelText: labelText,
       ),
-      prefixIcon: Icon(icon),
-      hintText: hintText,
-      labelText: labelText,
+      
     ),
-    obscureText: obscureText,
   );
 }
 

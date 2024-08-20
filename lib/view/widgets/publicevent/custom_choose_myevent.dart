@@ -1,6 +1,6 @@
 
 import 'package:eventa_project/color.dart';
-import 'package:eventa_project/view/screen/my_events/public/Veiw%20my%20events.dart';
+import 'package:eventa_project/view/screen/public_event/own_event/Veiw%20my%20events.dart';
 import 'package:flutter/material.dart';
 
 

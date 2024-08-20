@@ -1,115 +1,132 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:eventa_project/color.dart';
-import 'package:eventa_project/cubit/public_event_cubit/cubit.dart';
-import 'package:eventa_project/cubit/public_event_cubit/state.dart';
+import 'package:eventa_project/shared/constants.dart';
 import 'package:eventa_project/view/screen/public_event/EventDetailsScreen.dart';
+import 'package:eventa_project/view/screen/public_event/cubit/cubit.dart';
+import 'package:eventa_project/view/screen/public_event/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class VeiwpublicEvents extends ConsumerWidget {
-  VeiwpublicEvents({super.key});
-
+class VeiwpublicEvents extends StatelessWidget {
+  const VeiwpublicEvents({super.key, required this.categorieid});
+  final int categorieid;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
- 
-    return BlocConsumer<Pupliceventcubit, Pupliceventstate>(
-      listener: (context, state) {
-        if (state is GetEventFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.errMessage),
-            ),
-          );
-        }
-      },
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-        title: Text(
-          "Events",
-          style: TextStyle(fontSize: 31, color: Appcolor.white),
-        ),
-      ),
-          body: state is GetEventLoading
-              ? const CircularProgressIndicator()
-              : state is GetEventSuccess
-                  ? ListView.builder(
-      itemCount: state.event.data.length,
-      itemBuilder: (context, index) {
-        final events=state.event.data[index];
-        return GestureDetector(
-        //   onTap:(){
-        //  Navigator.push(context, MaterialPageRoute(builder:(context)=>AttendanceListScreen() ));
-        //   } ,
-          child: GestureDetector(
-            onTap: (){
-               Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => EventDetailsScreen()),
-                );
-            },
-            child: Card(
-              
-              elevation: 5,
-              shadowColor: Appcolor.mainColor,
-              margin: EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 92,
-                      width: 72,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage(events.image),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
+  Widget build(BuildContext context) {
+    return BlocProvider(
+        create: (context) => publiceventCubit()..getpublic(cat: categorieid),
+        child: BlocConsumer<publiceventCubit, publicStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            var publicevent = publiceventCubit.get(context);
+
+            return Scaffold(
+                appBar: AppBar(
+                  title: const Text(
+                    "Events",
+                    style: TextStyle(fontSize: 31, color: Appcolor.white),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                         events.date!,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Appcolor.mainColor,
+                ),
+                body: ConditionalBuilder(
+                    condition: state is! PublicInitialState,
+                    builder: (context) => ListView.separated(
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EventDetailsPage(
+                                        event: publicevent,
+                                        id: publicevent
+                                                .puplicevent[index].id,
+                                         image:image+publicevent
+                                                .puplicevent[index].image ,
+                                            date: publicevent
+                                                .puplicevent[index].date,
+                                            description: publicevent
+                                                .puplicevent[index].description,
+                                            location: publicevent
+                                                .puplicevent[index].address,
+                                          )),
+                                );
+                              },
+                              child: Card(
+                                elevation: 5,
+                                shadowColor: Appcolor.mainColor,
+                                margin: const EdgeInsets.all(10),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: 100,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                
+                                      '${image+publicevent
+                                                .puplicevent[index].image}'  ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            publicevent.puplicevent[index].name,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                              color: Appcolor.mainColor,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 15,
+                                          ),
+                                          Text(
+                                            publicevent.puplicevent[index].date,
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            publicevent
+                                                .puplicevent[index].address,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.grey[600],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  
+                                               
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(
+                            height: 20,
                           ),
+                          itemCount: publicevent.puplicevent.length,
                         ),
-                        SizedBox(height: 15,),
-                        Text(
-                         events.name,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          events.address,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    )
-                  : Container(child:Text('555555555555555555555555555555555555555555555555'),),
-        );
-      },
-    );
+                    fallback: (context) => const Center(
+                          child: CircularProgressIndicator(),
+                        )));
+          },
+        ));
   }
 }

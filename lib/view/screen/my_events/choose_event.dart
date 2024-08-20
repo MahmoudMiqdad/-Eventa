@@ -1,6 +1,5 @@
 import 'package:eventa_project/color.dart';
 import 'package:eventa_project/controller/provider_navbar.dart';
-import 'package:eventa_project/view/screen/my_events/public/Veiw%20my%20events.dart';
 import 'package:eventa_project/view/widgets/nav_bar/custom_nav_bar.dart';
 import 'package:eventa_project/view/widgets/nav_bar/custom_nav_bar_buttom.dart';
 import 'package:eventa_project/view/widgets/publicevent/custom_choose_myevent.dart';
